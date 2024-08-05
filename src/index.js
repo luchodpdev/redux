@@ -1,11 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore} from '@reduxjs/toolkit';
 import { Provider } from 'react-redux'
-import App,  { reducer } from './App';
+import {asyncMiddleware} from './middleware/async';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { reducer } from './features/todos';
+import {applyMiddleware} from 'redux';
 
-const store = configureStore({reducer: reducer})
+const store = configureStore({reducer: reducer, 
+  middleware: [asyncMiddleware]
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
